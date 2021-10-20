@@ -153,7 +153,7 @@ class GiftController extends Controller
         }
 
         //TODO: DoMail (2)
-        Mail::to("osdeibi@gmail.com")->send(new ThanksMail($gift));
+        Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($gift));
 
         return view('customer.gifts.send');
 
@@ -227,6 +227,33 @@ class GiftController extends Controller
         $gift->save();
 
         return view('customer.gifts.video')
+            ->with('model', $model);
+    }
+
+    public function preview($key, Request $request)
+    {
+        $request->session()->flush();
+        $gift = Gift::where('key','=', $key)->get()->first();
+        if ($gift == null){
+            $resultado = [
+                'title'=> 'No se encontro el regalo',
+                'icon'=> 'error',
+            ];
+            $request->session()->flash('toast', $resultado);
+            return view('customer.gifts.error');
+        }
+
+        app('debugbar')->debug($gift);
+
+        $model = new \stdClass();
+        $model->name = $gift->name;
+        $model->message = $gift->message;
+        $model->video = $gift->video;
+        $model->key = $gift->key;
+
+        app('debugbar')->debug($model);
+
+        return view('customer.gifts.preview')
             ->with('model', $model);
     }
 

@@ -29,6 +29,7 @@ Route::post('/gift', [GiftController::class, 'store'])->name('gift.store');
 Route::get('/admin/debug', [AdminController::class, 'debug'])->name('admin.debug');
 
 Route::get('/gift/play/{id}', [GiftController::class, 'play'])->name('gift.play');
+Route::get('/gift/preview/{id}', [GiftController::class, 'preview'])->name('gift.preview');
 Route::get('/video/{id}', [GiftController::class, 'video'])->name('gift.video');
 
 Route::get('send-mail', function () {
