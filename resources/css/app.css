@@ -1,0 +1,174 @@
+.antialiased{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+@font-face {
+    font-family: "Futura Medium";
+    src: url("../fonts/Futura-Medium.ttf");
+}
+@font-face {
+    font-family: "Futura Medium Italic";
+    src: url("../fonts/Futura-Medium.ttf");
+}
+@font-face {
+    font-family: "Futura Bold";
+    src: url("../fonts/Futura-Bold.ttf");
+}
+@font-face {
+    font-family: "Futura Condensed Medium";
+    src: url("../fonts/Futura-Condensed-Medium.otf");
+}
+@font-face {
+    font-family: "Futura Condensed Extra Bold";
+    src: url("../fonts/Futura-Condensed-Extra-Bold.ttf");
+}
+@font-face {
+    font-family: "Futura Heavy Regular";
+    src: url("../fonts/Futura-Heavy-Regular.otf");
+}
+html{
+    font-size: 16px;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 98px;
+    /* background-image: url(../img/mosaico.png), url(../img/mosaico.png);
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto, auto ;
+    background-position: left bottom, left top; */
+    background-image: url('../images/mosaico.png');
+    background-repeat: no-repeat;
+    background-size: auto ;
+    background-position: left top;
+    background-attachment: fixed;
+    color: #333;
+    line-height: 1.8;
+    font-weight: 300;
+
+}
+h1{
+    font-weight: normal;
+    font-size: 2.5rem;
+    color:#0a3869;
+    font-family: 'Futura Medium', sans-serif;
+}
+.variedad {
+    font-weight: normal;
+    font-family: "Futura Heavy Regular" , sans-serif;
+}
+h2{
+    font-weight: normal;
+    font-size: 2rem;
+    color:#0a3869;
+    font-family: 'Futura Medium', sans-serif;
+}
+h3{
+    color:#0a3869;
+    font-size: 1.75rem;
+    font-family: 'Futura Medium', sans-serif;
+    font-weight: normal;
+}
+h4{
+    color:#0a3869;
+    font-size: 1.2rem;
+    font-family: 'Futura Medium', sans-serif;
+    font-weight: normal;
+}
+h5{
+    color:#0a3869;
+    font-size: 1rem;
+    font-family: 'Futura Medium', sans-serif;
+    font-weight: normal;
+}
+p{
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+p strong{
+    font-weight: 500;
+}
+img{
+    width: 100%;
+}
+a{
+    color:#0a3869;
+    text-decoration: none;
+    font-family: 'Futura Medium', sans-serif;
+}
+.link{
+    font-size: 1.25rem;
+}
+.btn-outline-primary{
+    color:#0a3869;
+    border-color:#0a3869;
+}
+.btn-primary{
+    background-color:#0a3869;
+    border-color:#0a3869;
+
+}
+/* Reset */
+
+header{
+    background-color: rgb(255,255,255);
+}
+.logo{
+    width:150px;
+}
+#hero{
+    background: url('../images/placeholder.png') no-repeat center;
+    background-size: contain;
+}
+#about{
+    background-image: url('../images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+
+}
+@media(max-width:480px){
+    #about{
+        background-image: url('../images/fondo.jpg');
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: cover;
+        height: 400px;
+
+    }
+}
+.bkg-botella{
+    background-image: url('../images/mosaico-vino.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.botella{
+    width:150px;
+    margin: 0 auto;
+    display: block;
+}
+#custom-cards .card{
+    background-size: contain;
+}
+.icono-titulo{
+    width: 50px;
+}
+footer{
+    background-color: rgb(255,255,255);
+}
+footer .logo{
+    width:80%;
+}
+.rrss a{
+    font-size: 1.5rem;
+    display: inline-block;
+    margin:1rem .5rem 0;
+}
+@media(min-width:576px){
+    .rrss a:first-child{
+        margin-left: 0;
+    }
+}

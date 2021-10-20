@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^localhost$
+RewriteRule ^(.*)$ https://localhost$/$1 [R=301,L]
+RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+Header unset X-Powered-By
