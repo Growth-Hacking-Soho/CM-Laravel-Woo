@@ -43,7 +43,27 @@ class GiftController extends Controller
         $order_id = Crypt::encryptString($id);
 
         return view('customer.gifts.form')
-            ->with('order_id', $order_id);
+            ->with(['order_id' => $order_id, 'option' => false]);
+    }
+
+    public function showUpdate($key)
+    {
+        $gift = Gift::where('key','=', $key)->get()->first();
+        if ($gift == null){
+            return view('customer.gifts.error');
+        }
+
+        app('debugbar')->debug($gift);
+
+        $model = new \stdClass();
+        $model->name = $gift->name;
+        $model->message = $gift->message;
+        $model->email = $gift->email;
+        $model->phone = $gift->phone;
+        $model->key = $gift->key;
+
+        return view('customer.gifts.form')
+            ->with(['model' => $model, 'option' => true]);
     }
 
     public function data(Request $request) : JsonResponse
@@ -103,7 +123,6 @@ class GiftController extends Controller
 
     public function store(Request $request)
     {
-
         try{
             $request->validate([
                'order_id',
@@ -143,8 +162,8 @@ class GiftController extends Controller
             //https://www.getid3.org/
             //$metadata = exif_read_data('C:\Users\osdei\source\repos\laravel-woocommerce\storage\app\public\videos\c8c5969c-29f8-4548-a6f4-f334bdf51a99.mp4');
 
-            $fileName = "public/videos/".$gift->key.'.mp4';
-            Storage::disk('local')->put($fileName, file_get_contents($file));
+            $fileName = "videos/".$gift->key.'.mp4';
+            Storage::disk('public')->put($fileName, file_get_contents($file));
             $fullFileName = Storage::path($fileName);
 
             app('debugbar')->debug($fileName);
@@ -155,7 +174,8 @@ class GiftController extends Controller
         //TODO: DoMail (2)
         Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($gift));
 
-        return view('customer.gifts.send');
+        //return view('customer.gifts.send');
+        return redirect()->route('gift.preview', $gift->key);
 
         }
         catch(Exception $ex){
@@ -168,6 +188,45 @@ class GiftController extends Controller
                 ->with('order_id', $request->order_id)
                 ->with('toast', $error);
         }
+    }
+
+    public function update(Request $request, $key) {
+        app('debugbar')->debug("Probando $key");
+        //$request->session()->flush();
+        $gift = Gift::where('key', $key)->first();
+        /* if ($gift == null){
+            $resultado = [
+                'title'=> 'No se encontro el regalo',
+                'icon'=> 'error',
+            ];
+            $request->session()->flash('toast', $resultado);
+            return view('customer.gifts.error');
+        } */
+
+        $gift->name = $request->name;
+        $gift->email = $request->email;
+        $gift->phone = $request->phone;
+        $gift->message = $request->message;
+
+        $file = $request->file('video');
+        if ($file !== null) {
+            $gift->video = $request->video;
+
+            $fileName = "videos/".$gift->key.'.mp4';
+            //TODO: Eliminar video actual, para poder guardar nuevo video
+            Storage::disk('public')->delete($fileName);
+
+            Storage::disk('public')->put($fileName, file_get_contents($file));
+            $fullFileName = Storage::path($fileName);
+
+            app('debugbar')->debug($fileName);
+            app('debugbar')->debug($fullFileName);
+            //Vimeo::upload($fullFileName);
+        }
+
+        $gift->save();
+
+        return redirect()->route('gift.preview', $key);
     }
 
     public function play($key, Request $request)

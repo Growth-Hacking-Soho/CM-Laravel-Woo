@@ -16,7 +16,7 @@
                 <p class="my-5">{{ $model->message }}</p>
                 <!--<iframe width="100%" height="500" src="https://www.youtube.com/embed/LFIfKP_OvFk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
                 <div class="text-center">
-                    <button type="button" class="btn btn-outline-primary">Editar</button>
+                    <a href="{{ route('gift.showUpdate',$model->key) }}" type="button" class="btn btn-outline-primary">Editar</a>
                     <button type="button" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
