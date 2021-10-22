@@ -172,7 +172,7 @@ class GiftController extends Controller
         }
 
         //TODO: DoMail (2)
-        Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($gift));
+        //Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($gift));
 
         //return view('customer.gifts.send');
         return redirect()->route('gift.preview', $gift->key);

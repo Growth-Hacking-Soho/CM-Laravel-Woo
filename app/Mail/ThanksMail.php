@@ -31,6 +31,7 @@ class ThanksMail extends Mailable
     public function build()
     {
         return $this->subject('Mail de prueba')
-            ->view('emails.thanks');
+            ->view('emails.thanks')
+            ->with($this->details);
     }
 }

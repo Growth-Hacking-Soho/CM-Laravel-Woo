@@ -51,6 +51,7 @@
                                                             <h1 style="padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;" align="left">Has enviado tu video!</h1>
                                                                 {{--{{ $details['name'] }}--}}
                                                             <h5 class="text-muted" style="color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px; margin: 0;" align="left">Pronto estara tu ser querido recibiendo tu detalle</h5>
+                                                            <p>{{ $details }}</p>
                                                             <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                                                 <tbody>
                                                                 <tr>

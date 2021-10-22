@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\GiftController;
+use App\Mail\ThanksMail;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -34,14 +34,17 @@ Route::get('/gift/play/{id}', [GiftController::class, 'play'])->name('gift.play'
 Route::get('/gift/preview/{id}', [GiftController::class, 'preview'])->name('gift.preview');
 Route::get('/video/{id}', [GiftController::class, 'video'])->name('gift.video');
 
-Route::get('send-mail', function () {
+//send-mail
+Route::get('/gifts/send/{key}', function ($key) {
 
-    $details = [
+    /* $details = [
         'title' => 'Titulo del correo',
         'body' => 'Cuerpo del email'
-    ];
+    ]; */
 
-    \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\ThanksMail($details));
+    Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($key));
 
-    dd("Email enviado");
+    //dd("Email enviado");
+
+    return view('customer.gifts.send');
 });

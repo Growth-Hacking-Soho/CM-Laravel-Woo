@@ -17,7 +17,7 @@
                 <!--<iframe width="100%" height="500" src="https://www.youtube.com/embed/LFIfKP_OvFk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
                 <div class="text-center">
                     <a href="{{ route('gift.showUpdate',$model->key) }}" type="button" class="btn btn-outline-primary">Editar</a>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <a href="/gifts/send/{{ $model->key }}" type="button" class="btn btn-primary">Guardar</a>
                 </div>
             </div>
         </div>
