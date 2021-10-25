@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
+Route::get('/admin/orders', [GiftController::class, 'index'])->name('gift.index');
 
 Route::get('/gift/{id}', [GiftController::class, 'show'])->name('gift.show');
 Route::get('/gift/show/{key}', [GiftController::class, 'showUpdate'])->name('gift.showUpdate');

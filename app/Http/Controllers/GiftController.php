@@ -34,7 +34,7 @@ class GiftController extends Controller
             $orders = WooCommerce::all('orders');
             $orders = collect($orders)->filter(function($value) use ($sku) {
                 if (count($value->line_items) > 0) {
-                    if ($value->line_items[0]->sku === $sku) {
+                    if ($value->line_items[0]->sku === $sku && $value->status === 'completed') {
                         return true;
                     }
                 }
