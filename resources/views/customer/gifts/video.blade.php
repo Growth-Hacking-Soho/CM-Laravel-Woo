@@ -25,13 +25,13 @@
                 <h4>ACERCA DE ESTE VINO</h4>
             </div>
             <div class="col-md-7 order-md-3 mb-5 mb-md-0">
-                <h1 class="variedad">Cartagena<br>Sauvignon Blanc</h1>
+                <h1 class="variedad">{{ $model->product->name }}</h1>
                 <p class="my-5">{!! $model->description !!}</p>
-                <a href="#" class="link">Conocer Más <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ $model->product->permalink }}" class="link" target="_black">Conocer Más <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col-md-5 order-md-4 bkg-botella mb-5 mb-md-0">
 {{--                <img src="{{ $model->images[0]->src }}" class="botella"/>--}}
-                <img src="{{ asset('images/botella-vino.png') }}" class="botella"/>
+                <img src="{{ $model->product->images[0]->src }}" class="botella w-100"/>
             </div>
             <div class="col-md-6 order-md-2 text-center text-md-end">
                 <button type="button" class="btn btn-outline-primary"><i class="fas fa-download"></i> Descargar Ficha</button>
@@ -58,14 +58,13 @@
         <div class="row pb-5">
             <div class="col-md-5 mb-5 mb-md-0">
                 <h3><img src="{{ asset('images/icono-recomendaciones.svg') }}" class="icono-titulo"/> Recomendaciones</h3>
-                <p class="my-5">Su acidez fresca y Buena estructura en boca hace que este vino sea muy amigable con la comida. Es delicioso tomarlo durante un día caluroso de verano o en un maridaje con ensaladas frescas, queso de cabra y todo tipo de mariscos y pescados.</p>
-                <a href="#" class="link">Conocer Más <i class="fas fa-arrow-right"></i></a>
+                <p class="my-5">{!! $model->product->attributes[3]->options[0] !!}</p>
+                <a href="{{ $model->product->permalink }}" class="link" target="_black">Conocer Más <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col-md-5 offset-md-2">
                 <h3><img src="{{ asset('images/icono-premios.svg') }}" class="icono-titulo"/> Premios</h3>
-                <p class="my-5"><strong>La Cav:</strong> 93pts, 2019<br>
-                    <strong>Robert Parker´s Wine Advocate:</strong> 91pts, 2019​</p>
-                <a href="#" class="link">Conocer Más <i class="fas fa-arrow-right"></i></a>
+                <p id="premio" class="my-5">{{ $model->product->attributes[2]->options[0] }}​</p>
+                <a href="{{ $model->product->permalink }}" class="link" target="_black">Conocer Más <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -79,5 +78,4 @@
         </div>
     </div>
     <!-- Jumbotron -->
-
 @endsection

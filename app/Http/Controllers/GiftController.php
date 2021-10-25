@@ -26,6 +26,28 @@ use Vimeo\Laravel\Facades\Vimeo;
 
 class GiftController extends Controller
 {
+    public function index()
+    {
+        $orders = null;
+        try {
+            $sku = 'gift-box-primary';
+            $orders = WooCommerce::all('orders');
+            $orders = collect($orders)->filter(function($value) use ($sku) {
+                if (count($value->line_items) > 0) {
+                    if ($value->line_items[0]->sku === $sku) {
+                        return true;
+                    }
+                }
+            })->all();
+            //$orders = collect($orders)->where('id', 4390)->all();
+            app('debugbar')->debug(($orders));
+        }
+        catch (Exception $e) {
+        }
+
+        return view('admin.orders')
+            ->with('orders', $orders);
+    }
 
     public function show($id)
     {
@@ -252,7 +274,7 @@ class GiftController extends Controller
             return view('customer.gifts.error');
         }
 
-        $product_id = $order->line_items[0]->product_id;
+        $product_id = $order->line_items[1]->product_id;
 
         $product = WooCommerce::find('products/' . $product_id);
         if ($product == null) {
@@ -276,6 +298,8 @@ class GiftController extends Controller
         $model->images = $product->images;
         $model->video = $gift->video;
         $model->key = $gift->key;
+        $model->product = $product;
+        $model->order = $order;
 
         app('debugbar')->debug($model);
 
@@ -316,7 +340,7 @@ class GiftController extends Controller
             ->with('model', $model);
     }
 
-    public function video($id){
+    public function video($id) {
 
         $path = storage_path('app/public/videos/'.$id.'.mp4');
 
@@ -331,4 +355,11 @@ class GiftController extends Controller
         });
     }
 
+    public function sendMail($key) {
+        Mail::to("jspinzonr@gmail.com")->send(new ThanksMail($key));
+
+        //dd("Email enviado");
+
+        return view('customer.gifts.send');
+    }
 }
