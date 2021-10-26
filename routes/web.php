@@ -25,6 +25,10 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/orders', [GiftController::class, 'index'])->name('gift.index');
 
 Route::get('/gift/{id}', [GiftController::class, 'show'])->name('gift.show');
+Route::get('/gift/index/{uuid}', function ($uuid) {
+    return view('customer.gifts.index')
+    ->with('uuid', $uuid);
+});
 Route::get('/gift/show/{key}', [GiftController::class, 'showUpdate'])->name('gift.showUpdate');
 Route::post('/gift', [GiftController::class, 'store'])->name('gift.store');
 Route::post('/gift/{key}', [GiftController::class, 'update'])->name('gift.update');
@@ -47,5 +51,6 @@ Route::get('/gifts/send/{key}', function ($key) {
 
     //dd("Email enviado");
 
-    return view('customer.gifts.send');
+    return view('customer.gifts.send')
+    ->with('key', $key);
 });

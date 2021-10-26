@@ -5,7 +5,7 @@
     <div class="container px-4 py-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h4 class="text-center">Ingresa aquí tu mensaje y sube tu mensaje para la celebración</h4>
+                <h4 class="text-center">Escribe aquí­ el mensaje y sube tu video para la persona que recibirá tu regalo:</h4>
                 @if ($option)
                     <form id="giftForm" method="POST" action="{{ url("gift/$model->key") }}" enctype="multipart/form-data" >
                         @csrf
