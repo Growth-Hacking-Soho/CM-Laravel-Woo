@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ThanksMail;
 use App\Models\Gift;
+use App\Models\Order as ModelsOrder;
 use Carbon\Carbon;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Codexshaper\WooCommerce\Models\Order;
@@ -28,22 +29,8 @@ class GiftController extends Controller
 {
     public function index()
     {
-        $orders = null;
-        try {
-            $sku = 'gift-box-primary';
-            $orders = WooCommerce::all('orders');
-            $orders = collect($orders)->filter(function($value) use ($sku) {
-                if (count($value->line_items) > 0) {
-                    if ($value->line_items[0]->sku === $sku && $value->status === 'completed') {
-                        return true;
-                    }
-                }
-            })->all();
-            //$orders = collect($orders)->where('id', 4390)->all();
-            app('debugbar')->debug(($orders));
-        }
-        catch (Exception $e) {
-        }
+        $orders = ModelsOrder::all();
+        app('debugbar')->debug(($orders));
 
         return view('admin.orders')
             ->with('orders', $orders);

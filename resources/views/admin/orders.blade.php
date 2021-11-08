@@ -16,15 +16,17 @@
             <tr>
                 <th>Orden</th>
                 <th>Estado</th>
+                <th>Enviado</th>
                 <th>Creacion</th>
             </tr>
             </thead>
             <tbody>
                 @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->order_id }}</td>
                         <td>{{ $order->status }}</td>
-                        <td>{{ $order->date_created }}</td>
+                        <td>{{ $order->send ? 'Si' : 'No' }}</td>
+                        <td>{{ $order->created_at }}</td>
                     </tr>
                 @endforeach
             </tbody>
