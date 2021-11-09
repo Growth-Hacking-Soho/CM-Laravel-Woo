@@ -9,15 +9,23 @@
                 <h4 class="text-center">Completa los siguientes datos para iniciar la celebración:</h4>
                 <form id="giftForm" method="POST" action="{{ url("gift/index/$uuid") }}" enctype="multipart/form-data" >
                     @csrf
-                    <div class="form-group mt-4">
+                    {{-- <div class="form-group mt-4">
                         <label for="name">Tu Nombre*</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
+                    </div> --}}
+                    <?php if ($model->email == "" && $model->email == null) :?>
                     <div class="form-group mt-4">
                         <label for="email">Tu Email*</label>
                         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
                         <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu email.</small>
                     </div>
+                    <?php endif; ?>
+                    <?php if ($model->phone == "" && $model->phone == null) :?>
+                    <div  class="form-group mt-4">
+                        <label for="phone">Tu Teléfono</label>
+                        <input type="number" class="form-control" id="phone" name="phone">
+                    </div>
+                    <?php endif; ?>
                     <div class="form-group mt-4">
                         <label for="serie">N° de serie*</label>
                         <input type="number" class="form-control" id="phone" name="serie" aria-describedby="serieHelp" required>

@@ -51,7 +51,7 @@
                             <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group mt-5">
-                            <label for="phone">Telefono de tu ser querido</label>
+                            <label for="phone">Teléfono de tu ser querido</label>
                             <input type="number" class="form-control" id="phone" name="phone">
                         </div>
                         <div class="form-group mt-5">

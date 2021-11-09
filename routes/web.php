@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GiftController;
 use App\Mail\ThanksMail;
+use App\Models\Gift;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,22 @@ Route::get('/admin/orders', [GiftController::class, 'index'])->name('gift.index'
 
 Route::get('/gift/{id}', [GiftController::class, 'show'])->name('gift.show');
 Route::get('/gift/index/{uuid}', function ($uuid) {
+    $gift = Gift::where('key','=', $uuid)->get()->first();
+    if ($gift == null){
+        return view('customer.gifts.error');
+    }
+
+    $model = new \stdClass();
+    $model->name = $gift->name;
+    $model->message = $gift->message;
+    $model->email = $gift->email;
+    $model->phone = $gift->phone;
+    $model->key = $gift->key;
+
+    app('debugbar')->debug($model);
+
     return view('customer.gifts.index')
-    ->with('uuid', $uuid);
+    ->with(['uuid' => $uuid, 'model' => $model]);
 });
 Route::get('/gift/show/{key}', [GiftController::class, 'showUpdate'])->name('gift.showUpdate');
 Route::post('/gift', [GiftController::class, 'store'])->name('gift.store');
