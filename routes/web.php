@@ -38,6 +38,7 @@ Route::get('/admin/debug', [AdminController::class, 'debug'])->name('admin.debug
 Route::get('/gift/play/{id}', [GiftController::class, 'play'])->name('gift.play');
 Route::get('/gift/preview/{id}', [GiftController::class, 'preview'])->name('gift.preview');
 Route::get('/video/{id}', [GiftController::class, 'video'])->name('gift.video');
+Route::get('/media/{id}', [GiftController::class, 'media'])->name('gift.media');
 
 //send-mail
 Route::get('/gifts/send/{key}', function ($key) {

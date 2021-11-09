@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ThanksMail;
 use App\Models\Gift;
+use App\Models\Media;
 use App\Models\Order as ModelsOrder;
 use Carbon\Carbon;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
@@ -273,6 +274,8 @@ class GiftController extends Controller
             return view('customer.gifts.error');
         }
 
+        $media = Media::where('product_id', $product->id)->first();
+
         app('debugbar')->debug($product);
         app('debugbar')->debug($gift);
         app('debugbar')->debug($order);
@@ -281,12 +284,14 @@ class GiftController extends Controller
         $model->name = $gift->name;
         $model->message = $gift->message;
         $model->status = $order->status;
+        $model->product_id = $product->id;
         $model->description = $product->description;
         $model->images = $product->images;
         $model->video = $gift->video;
         $model->key = $gift->key;
         $model->product = $product;
         $model->order = $order;
+        $model->author = $media->author;
 
         app('debugbar')->debug($model);
 
@@ -330,6 +335,21 @@ class GiftController extends Controller
     public function video($id) {
 
         $path = storage_path('app/public/videos/'.$id.'.mp4');
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $stream = new \App\Http\VideoStream($path);
+
+        return response()->stream(function() use ($stream) {
+            $stream->start();
+        });
+    }
+
+    public function media($product_id) {
+
+        $path = resource_path() .'/videos/2346.mp4';
 
         if (!File::exists($path)) {
             abort(404);

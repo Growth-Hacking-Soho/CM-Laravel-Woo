@@ -44,9 +44,13 @@
     <div class="container px-4 py-5">
         <div class="row">
             <div class="col-md-12">
-                <h2>Jamie Verbraak - Acerca de Cartagena Sauvignon Blanc</h2>
+                <h2>{{ $model->author }} - Acerca de {{ $model->product->name }}</h2>
                 <p class="my-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae magna at elit tristique finibus. Morbi lobortis urna in tortor porta efficitur. Nulla vestibulum mi eget urna semper auctor. Phasellus rhoncus, erat et eleifend bibendum, elit leo elementum nunc, quis ullamcorper risus orci quis risus. Sed id eros egestas, sollicitudin massa non, euismod ipsum. Etiam diam dolor, cursus a mi in, facilisis cursus odio. Morbi faucibus semper enim, nec scelerisque lectus suscipit id. Aenean id ex rutrum, porttitor mauris sed, vestibulum sem. Duis quam nunc, tristique id risus ut, tincidunt malesuada nisl. Praesent ultrices gravida nunc vel vestibulum.</p>
-                <iframe width="100%" height="500" src="https://www.youtube.com/embed/LFIfKP_OvFk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="text-center">
+                    <video style="height: 600px" controls>
+                        <source src="{{ route('gift.media',$model->product_id) }}" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
     </div>
